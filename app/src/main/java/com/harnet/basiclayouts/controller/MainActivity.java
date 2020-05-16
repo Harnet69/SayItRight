@@ -23,26 +23,16 @@ public class MainActivity extends AppCompatActivity {
 
         addWordToBtn();
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
-//        System.out.println(audioThequeController.getAudioTheque().getMediaWords());
-//        audioThequeController.getAudioTheque().getMediaWords().get(0).start();
 
-
-//        final MediaPlayer doYou = MediaPlayer.create(this, R.raw.do_you_speak_english);
-//        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                doYou.start();
-////                addWordToBtn();
-//            }
-//        });
     }
 
-    // add text to buttons
+    // add text and audio file to buttons
     public void addWordToBtn() {
         GridLayout yourLayout = findViewById(R.id.grid);
 
         for (int i = 0; i < yourLayout.getChildCount(); i++) {
             View subView = yourLayout.getChildAt(i);
+//            System.out.println("Audio: " + audioThequeController.getAudioTheque().getMediaWords().get(i));
             final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[i];
             if (subView instanceof Button) {
                 ((Button) subView).setText(wordToAdd.getName());

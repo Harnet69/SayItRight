@@ -14,9 +14,10 @@ public class AudioThequeController {
 
 
     public AudioThequeController(MainActivity mainActivity) {
-        this.audioTheque = new AudioTheque();
+        this.audioTheque = new AudioTheque("France");
         this.mainActivity = mainActivity;
         addAllWords();
+//        addAudioSourceFromFolder();
     }
 
     public AudioTheque getAudioTheque() {
@@ -33,7 +34,6 @@ public class AudioThequeController {
 
 
     // add phrases file names form raw folder
-    //TODO it possible to add a reference to audiofile and add HashMap
     private void addAllWords() {
         Field[] fields = R.raw.class.getFields();
         for (Field field : fields) {
@@ -44,9 +44,22 @@ public class AudioThequeController {
     public void addAllMediaWords() {
         Field[] fields = R.raw.class.getFields();
         for (Field field : fields) {
-            System.out.println("Field: " + field);
             int mediaFile = mainActivity.getResources().getIdentifier(field.getName(), "raw", mainActivity.getPackageName());
             addMediaPlayers(MediaPlayer.create(mainActivity, mediaFile));
+        }
+    }
+
+    // TODO To leave
+    public void addAudioSource(String audioFileTitle, MediaPlayer audioFile){
+        audioTheque.getAudioSource().put(audioFileTitle, audioFile);
+    }
+
+    private void addAudioSourceFromFolder(){
+        Field[] fields = R.raw.class.getFields();
+        for (Field field : fields) {
+            String audioFileTitle = field.getName();
+            int mediaFile = mainActivity.getResources().getIdentifier(field.getName(), "raw", mainActivity.getPackageName());
+            addAudioSource(audioFileTitle, MediaPlayer.create(mainActivity, mediaFile));
         }
     }
 
