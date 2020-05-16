@@ -33,7 +33,6 @@ public class AudioThequeController {
 
 
     // add phrases file names form raw folder
-    //TODO it possible to add a reference to audiofile and add HashMap
     private void addAllWords() {
         Field[] fields = R.raw.class.getFields();
         for (Field field : fields) {
@@ -44,7 +43,6 @@ public class AudioThequeController {
     public void addAllMediaWords() {
         Field[] fields = R.raw.class.getFields();
         for (Field field : fields) {
-            System.out.println("Field: " + field);
             int mediaFile = mainActivity.getResources().getIdentifier(field.getName(), "raw", mainActivity.getPackageName());
             addMediaPlayers(MediaPlayer.create(mainActivity, mediaFile));
         }
