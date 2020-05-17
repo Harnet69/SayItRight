@@ -23,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        if(intent.getStringExtra("BTNS_QUANTITY") != null){
+            String learnedWords = intent.getStringExtra("BTNS_QUANTITY");
+            assert learnedWords != null;
+            btns_qtt = Integer.parseInt(learnedWords);
+        }
+
         addWordToBtn();
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
     }
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToNextPage() {
         btns_qtt += countBtnsInGrid();
-        Intent intent = new Intent(this, Page2.class);
+        Intent intent = new Intent(this, MainActivity.class);
         String message = String.valueOf(btns_qtt);
         intent.putExtra(BTNS_QUANTITY, message);
         startActivity(intent);

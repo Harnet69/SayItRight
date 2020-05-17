@@ -27,7 +27,7 @@ public class Page2 extends AppCompatActivity {
         String learnedWords = intent.getStringExtra("BTNS_QUANTITY");
         assert learnedWords != null;
         btns_qtt = Integer.parseInt(learnedWords);
-        System.out.println(btns_qtt);
+
         addWordToBtn();
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
     }

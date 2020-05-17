@@ -48,6 +48,4 @@ public class AudioThequeController {
             addMediaPlayers(MediaPlayer.create(mainActivity, mediaFile));
         }
     }
-
-
 }
