@@ -41,7 +41,7 @@ public class Page2 extends AppCompatActivity {
         for (int i = 0, k = btns_qtt; i < BtnsGrid.getChildCount() && k < audioFilesQtt; i++, k++) {
             View subView = BtnsGrid.getChildAt(i);
             final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[k];
-            if (i < BtnsGrid.getChildCount() - 1) {
+            if (i < BtnsGrid.getChildCount() - 2) {
                 if (subView instanceof Button) {
                     ((Button) subView).setText(wordToAdd.getName());
                     final int finalK = k;
@@ -52,7 +52,18 @@ public class Page2 extends AppCompatActivity {
                         }
                     });
                 }
-            } else {
+            } else if (i < BtnsGrid.getChildCount() - 1) {
+                if (subView instanceof Button) {
+                    ((Button) subView).setText("prev page");
+                    subView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            goToPrevPage();
+                        }
+                    });
+                }
+            }
+            else if (i < BtnsGrid.getChildCount() - 2) {
                 if (subView instanceof Button) {
                     ((Button) subView).setText("next page");
                     subView.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +90,14 @@ public class Page2 extends AppCompatActivity {
             }
         }
         return btnCounter-1;
+    }
+
+    public void goToPrevPage() {
+        Intent intent = new Intent(this, Page2.class);
+        String message = String.valueOf(btns_qtt);
+        intent.putExtra(BTNS_QUANTITY, message);
+        startActivity(intent);
+        btns_qtt -= countBtnsInGrid();
     }
 
     public void goToNextPage() {

@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
 public class MainActivity extends AppCompatActivity {
     AudioThequeController audioThequeController = new AudioThequeController(this);
     public static final String BTNS_QUANTITY = "BTNS_QUANTITY";
-    public int btns_qtt;
+    public int btns_qtt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0, k = btns_qtt; i < BtnsGrid.getChildCount() && k < audioFilesQtt; i++, k++) {
             View subView = BtnsGrid.getChildAt(i);
             final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[k];
-            if (i < BtnsGrid.getChildCount() - 1) {
+            if (i < BtnsGrid.getChildCount() - 2) {
                 if (subView instanceof Button) {
                     ((Button) subView).setText(wordToAdd.getName());
                     final int finalK = k;
@@ -54,7 +54,19 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
-            } else {
+            }
+            else if (i < BtnsGrid.getChildCount() - 1 && btns_qtt != 0) {
+                if (subView instanceof Button) {
+                    ((Button) subView).setText("prev page");
+                    subView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            goToPrevPage();
+                        }
+                    });
+                }
+            }
+            else if (i == BtnsGrid.getChildCount()-1) {
                 if (subView instanceof Button) {
                     ((Button) subView).setText("next page");
                     subView.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +92,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        return btnCounter-1;
+        return btnCounter-2;
+    }
+
+
+    public void goToPrevPage() {
+        btns_qtt -= countBtnsInGrid();
+        Intent intent = new Intent(this, Page2.class);
+        String message = String.valueOf(btns_qtt);
+        intent.putExtra(BTNS_QUANTITY, message);
+        startActivity(intent);
     }
 
     public void goToNextPage() {
