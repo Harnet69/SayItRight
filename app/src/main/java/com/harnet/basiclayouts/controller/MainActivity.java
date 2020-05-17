@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private int countBtnsInGrid() {
         GridLayout yourLayout = findViewById(R.id.grid);
         int btnCounter = 0;
+
         for (int i = 0; i < yourLayout.getChildCount(); i++) {
             View subView = yourLayout.getChildAt(i);
             if (i < yourLayout.getChildCount()) {
