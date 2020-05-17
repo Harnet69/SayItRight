@@ -1,5 +1,6 @@
 package com.harnet.basiclayouts.controller;
 
+import android.app.Activity;
 import android.media.MediaPlayer;
 
 import com.harnet.basiclayouts.R;
@@ -10,10 +11,10 @@ import java.lang.reflect.Field;
 
 public class AudioThequeController {
     private AudioTheque audioTheque;
-    MainActivity mainActivity;
+    Activity mainActivity;
 
 
-    public AudioThequeController(MainActivity mainActivity) {
+    public AudioThequeController(Activity mainActivity) {
         this.audioTheque = new AudioTheque();
         this.mainActivity = mainActivity;
         addAllWords();

@@ -16,13 +16,14 @@ import java.lang.reflect.Field;
 public class MainActivity extends AppCompatActivity {
     AudioThequeController audioThequeController = new AudioThequeController(this);
     public static final String BTNS_QUANTITY = "BTNS_QUANTITY";
-    public String btns_qtt;
+    public int btns_qtt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btns_qtt = String.valueOf(countBtnsInGrid());
+
+        btns_qtt += countBtnsInGrid();
         addWordToBtn();
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
     }
@@ -72,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        return btnCounter;
+        return btnCounter-1;
     }
 
     public void goToNextPage() {
         Intent intent = new Intent(this, Page2.class);
-        String message = btns_qtt;
+        String message = String.valueOf(btns_qtt);
         intent.putExtra(BTNS_QUANTITY, message);
         startActivity(intent);
     }
