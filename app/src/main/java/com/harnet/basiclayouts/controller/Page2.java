@@ -3,18 +3,14 @@ package com.harnet.basiclayouts.controller;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.harnet.basiclayouts.R;
-
 import java.lang.reflect.Field;
-import java.util.Objects;
 
 public class Page2 extends AppCompatActivity {
     AudioThequeController audioThequeController = new AudioThequeController(this);
@@ -31,8 +27,7 @@ public class Page2 extends AppCompatActivity {
         String learnedWords = intent.getStringExtra("BTNS_QUANTITY");
         assert learnedWords != null;
         btns_qtt = Integer.parseInt(learnedWords);
-
-        btns_qtt += countBtnsInGrid();
+        System.out.println(btns_qtt);
         addWordToBtn();
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
     }
@@ -41,18 +36,19 @@ public class Page2 extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void addWordToBtn() {
         GridLayout BtnsGrid = findViewById(R.id.grid);
+        int audioFilesQtt = audioThequeController.getAudioTheque().getAudioFiles().length;
 
-        for (int i = 0; i < BtnsGrid.getChildCount(); i++) {
+        for (int i = 0, k = btns_qtt; i < BtnsGrid.getChildCount() && k < audioFilesQtt; i++, k++) {
             View subView = BtnsGrid.getChildAt(i);
-            final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[i];
+            final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[k];
             if (i < BtnsGrid.getChildCount() - 1) {
                 if (subView instanceof Button) {
                     ((Button) subView).setText(wordToAdd.getName());
-                    final int finalI = i;
+                    final int finalK = k;
                     subView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            audioThequeController.getAudioTheque().getMediaWords().get(finalI).start();
+                            audioThequeController.getAudioTheque().getMediaWords().get(finalK).start();
                         }
                     });
                 }
@@ -90,5 +86,6 @@ public class Page2 extends AppCompatActivity {
         String message = String.valueOf(btns_qtt);
         intent.putExtra(BTNS_QUANTITY, message);
         startActivity(intent);
+        btns_qtt += countBtnsInGrid();
     }
 }
