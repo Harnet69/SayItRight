@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToPrevPage() {
         btns_qtt -= countBtnsInGrid();
-        Intent intent = new Intent(this, Page2.class);
+        Intent intent = new Intent(this, MainActivity.class);
         String message = String.valueOf(btns_qtt);
         intent.putExtra(BTNS_QUANTITY, message);
         startActivity(intent);
