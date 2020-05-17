@@ -3,9 +3,7 @@ package com.harnet.basiclayouts.controller;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,18 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         addWordToBtn();
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
-//        System.out.println(audioThequeController.getAudioTheque().getMediaWords());
-//        audioThequeController.getAudioTheque().getMediaWords().get(0).start();
-
-
-//        final MediaPlayer doYou = MediaPlayer.create(this, R.raw.do_you_speak_english);
-//        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                doYou.start();
-////                addWordToBtn();
-//            }
-//        });
     }
 
     // add text to buttons
