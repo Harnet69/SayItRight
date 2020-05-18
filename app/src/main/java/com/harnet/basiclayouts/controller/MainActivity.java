@@ -39,42 +39,41 @@ public class MainActivity extends AppCompatActivity {
     public void addWordToBtn() {
         GridLayout BtnsGrid = findViewById(R.id.grid);
         int audioFilesQtt = audioThequeController.getAudioTheque().getAudioFiles().length;
-
-        for (int i = 0, k = btns_qtt; i < BtnsGrid.getChildCount(); i++, k++) {
-            View subView = BtnsGrid.getChildAt(i);
-            if (i < BtnsGrid.getChildCount() - 2 && k < audioFilesQtt) {
-                if (subView instanceof Button) {
-                    final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[k];
-                    ((Button) subView).setText(wordToAdd.getName());
-                    final int finalK = k;
-                    subView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            audioThequeController.getAudioTheque().getMediaWords().get(finalK).start();
-                        }
-                    });
-                }
-            }
-            else if (i == BtnsGrid.getChildCount() - 2 && btns_qtt != 0) {
-                if (subView instanceof Button) {
-                    ((Button) subView).setText("prev page");
-                    subView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            goToPrevPage();
-                        }
-                    });
-                }
-            }
-            else if (i == BtnsGrid.getChildCount()-1&& k < audioFilesQtt) {
-                if (subView instanceof Button) {
-                    ((Button) subView).setText("next page");
-                    subView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            goToNextPage();
-                        }
-                    });
+        if(BtnsGrid != null) {
+            for (int i = 0, k = btns_qtt; i < BtnsGrid.getChildCount(); i++, k++) {
+                View subView = BtnsGrid.getChildAt(i);
+                if (i < BtnsGrid.getChildCount() - 2 && k < audioFilesQtt) {
+                    if (subView instanceof Button) {
+                        final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[k];
+                        ((Button) subView).setText(wordToAdd.getName());
+                        final int finalK = k;
+                        subView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                audioThequeController.getAudioTheque().getMediaWords().get(finalK).start();
+                            }
+                        });
+                    }
+                } else if (i == BtnsGrid.getChildCount() - 2 && btns_qtt != 0) {
+                    if (subView instanceof Button) {
+                        ((Button) subView).setText("prev page");
+                        subView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                goToPrevPage();
+                            }
+                        });
+                    }
+                } else if (i == BtnsGrid.getChildCount() - 1 && k < audioFilesQtt) {
+                    if (subView instanceof Button) {
+                        ((Button) subView).setText("next page");
+                        subView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                goToNextPage();
+                            }
+                        });
+                    }
                 }
             }
         }
