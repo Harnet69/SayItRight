@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
         GridLayout BtnsGrid = findViewById(R.id.grid);
         int audioFilesQtt = audioThequeController.getAudioTheque().getAudioFiles().length;
 
-        for (int i = 0, k = btns_qtt; i < BtnsGrid.getChildCount() && k < audioFilesQtt; i++, k++) {
+        for (int i = 0, k = btns_qtt; i < BtnsGrid.getChildCount(); i++, k++) {
             View subView = BtnsGrid.getChildAt(i);
-            final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[k];
-            if (i < BtnsGrid.getChildCount() - 2) {
+            if (i < BtnsGrid.getChildCount() - 2 && k < audioFilesQtt) {
                 if (subView instanceof Button) {
+                    final Field wordToAdd = audioThequeController.getAudioTheque().getAudioFiles()[k];
                     ((Button) subView).setText(wordToAdd.getName());
                     final int finalK = k;
                     subView.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             }
-            else if (i == BtnsGrid.getChildCount()-1) {
+            else if (i == BtnsGrid.getChildCount()-1&& k < audioFilesQtt) {
                 if (subView instanceof Button) {
                     ((Button) subView).setText("next page");
                     subView.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         return btnCounter-2;
     }
 
-
+// TODO Ask Adam if I have to unite these two methods
     public void goToPrevPage() {
         btns_qtt -= countBtnsInGrid();
         Intent intent = new Intent(this, MainActivity.class);
