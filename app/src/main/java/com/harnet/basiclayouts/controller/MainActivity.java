@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             }
-            else if (i < BtnsGrid.getChildCount() - 1 && btns_qtt != 0) {
+            else if (i == BtnsGrid.getChildCount() - 2 && btns_qtt != 0) {
                 if (subView instanceof Button) {
                     ((Button) subView).setText("prev page");
                     subView.setOnClickListener(new View.OnClickListener() {
