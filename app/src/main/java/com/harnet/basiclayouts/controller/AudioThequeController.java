@@ -18,6 +18,7 @@ public class AudioThequeController {
         this.audioTheque = new AudioTheque();
         this.mainActivity = mainActivity;
         addAllWords();
+//        addAllMediaWords();
     }
 
     public AudioTheque getAudioTheque() {

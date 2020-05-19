@@ -2,12 +2,12 @@ package com.harnet.basiclayouts.controller;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,12 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.harnet.basiclayouts.R;
 
+import java.util.List;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
     private Context mContext;
+    private List<String> words;
+    private List<MediaPlayer> files;
 
-    public RecyclerViewAdapter(Context mContext) {
+    public RecyclerViewAdapter(Context mContext, List<String> words, List<MediaPlayer> files) {
         this.mContext = mContext;
+        this.words = words;
+        this.files = files;
     }
 
     @NonNull
@@ -34,13 +40,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called");
+        holder.btn1.setText(words.get(0));
+        holder.btn2.setText(words.get(1));
+        holder.btn3.setText(words.get(2));
         holder.btn1.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ShowToast")
             @Override
             public void onClick(View v) {
                 Log.i("Click", "Click on Btn1!");
-                Toast.makeText(mContext, "Click on Btn1!", Toast.LENGTH_LONG);
+            }
+        });
+        
+        holder.btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Click", "Click on Btn2!");
+            }
+        });
+        
+        holder.btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Click", "Click on Btn3!");
             }
         });
     }
