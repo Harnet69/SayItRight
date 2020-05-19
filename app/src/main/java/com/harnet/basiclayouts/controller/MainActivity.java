@@ -2,10 +2,13 @@ package com.harnet.basiclayouts.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -22,16 +25,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initRecyclerView();
 
-        Intent intent = getIntent();
-        if(intent.getStringExtra("BTNS_QUANTITY") != null){
-            String learnedWords = intent.getStringExtra("BTNS_QUANTITY");
-            assert learnedWords != null;
-            btns_qtt = Integer.parseInt(learnedWords);
-        }
-
-        addWordToBtn();
+//        Intent intent = getIntent();
+//        if(intent.getStringExtra("BTNS_QUANTITY") != null){
+//            String learnedWords = intent.getStringExtra("BTNS_QUANTITY");
+//            assert learnedWords != null;
+//            btns_qtt = Integer.parseInt(learnedWords);
+//        }
+//
+//        addWordToBtn();
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
+    }
+
+
+    public void initRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recyrclerView);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     // add text to buttons
