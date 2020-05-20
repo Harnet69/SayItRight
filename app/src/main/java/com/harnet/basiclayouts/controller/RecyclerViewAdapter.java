@@ -1,6 +1,5 @@
 package com.harnet.basiclayouts.controller;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -8,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,7 +23,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<MediaPlayer> files;
     AudioThequeController audioThequeController;
     private int wordsCounter = 0;
-    private int filesCounter = 3;
 
     public RecyclerViewAdapter(Context mContext, AudioThequeController audioThequeController, List<String> words, List<MediaPlayer> files) {
         this.mContext = mContext;
@@ -45,13 +41,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final int i = position*3;
-        if (wordsCounter < words.size() - 3 && filesCounter < files.size() - 3) {
+        final int i = position * 3;
+        if (wordsCounter < words.size() - 3) {
             holder.btn1.setText(words.get(wordsCounter));
             holder.btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println(i);
                     files.get(i).start();
                 }
             });
@@ -60,20 +55,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holder.btn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println(i);
-                    files.get(i+1).start();
+                    files.get(i + 1).start();
                 }
             });
             holder.btn3.setText(words.get(wordsCounter + 2));
             holder.btn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println(i);
-                    files.get(i+2).start();
+                    files.get(i + 2).start();
                 }
             });
             wordsCounter += 3;
-            filesCounter += 1;
         }
     }
 
@@ -83,7 +75,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return words.size() / 3; // how much repeated view it'll be
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements OnNoteListener {
+    public class ViewHolder extends RecyclerView.ViewHolder{
         ConstraintLayout parent_layout;
         View gridLayout;
         Button btn1;
@@ -97,16 +89,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             btn1 = itemView.findViewById(R.id.button1);
             btn2 = itemView.findViewById(R.id.button2);
             btn3 = itemView.findViewById(R.id.button3);
-//            itemView.setOnClickListener((View.OnClickListener) this);
         }
-
-        @Override
-        public void onNoteClick(int position) {
-
-        }
-    }
-
-    public interface OnNoteListener {
-        void onNoteClick(int position);
     }
 }
