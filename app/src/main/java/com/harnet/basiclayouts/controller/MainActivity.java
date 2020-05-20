@@ -1,11 +1,14 @@
 package com.harnet.basiclayouts.controller;
 
+import android.media.MediaPlayer;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.media.MediaPlayer;
-import android.os.Bundle;
+
 import com.harnet.basiclayouts.R;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
@@ -26,5 +29,9 @@ public class MainActivity extends AppCompatActivity{
         List<String> words = audioThequeController.getAudioTheque().getWords();
         List<MediaPlayer> files = audioThequeController.getAudioTheque().getMediaWords();
         RecyclerView recyclerView = findViewById(R.id.recyrclerView);
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, audioThequeController, words, files);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
