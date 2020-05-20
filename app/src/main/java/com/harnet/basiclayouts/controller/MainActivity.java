@@ -18,7 +18,7 @@ import com.harnet.basiclayouts.R;
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.OnNoteListener {
     AudioThequeController audioThequeController = new AudioThequeController(this);
     public static final String BTNS_QUANTITY = "BTNS_QUANTITY";
     public int btns_qtt = 0;
@@ -38,9 +38,16 @@ public class MainActivity extends AppCompatActivity {
         List<MediaPlayer> files = audioThequeController.getAudioTheque().getMediaWords();
         RecyclerView recyclerView = findViewById(R.id.recyrclerView);
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, words, files);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, audioThequeController, words, files);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+//        audioThequeController.getAudioTheque().getMediaWords().get(position);
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
     }
 
 
