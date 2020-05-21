@@ -34,7 +34,7 @@ public class AudioThequeController {
     private void addAllWords() {
         Field[] fields = R.raw.class.getFields();
         for (Field field : fields) {
-            addWordToAydioTheque(field.getName());
+            addWordToAydioTheque(trimUnderScores(field.getName()));
         }
     }
 
@@ -45,5 +45,10 @@ public class AudioThequeController {
             int mediaFile = mainActivity.getResources().getIdentifier(field.getName(), "raw", mainActivity.getPackageName());
             addMediaPlayers(MediaPlayer.create(mainActivity, mediaFile));
         }
+    }
+
+    // replace underscores with whitespace
+    private String trimUnderScores(String inputStr){
+        return inputStr.toLowerCase().replaceAll("_", " ");
     }
 }
