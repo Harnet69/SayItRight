@@ -2,10 +2,8 @@ package com.harnet.basiclayouts.controller;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
-
 import com.harnet.basiclayouts.R;
 import com.harnet.basiclayouts.model.AudioTheque;
-
 import java.lang.reflect.Field;
 
 
@@ -32,7 +30,6 @@ public class AudioThequeController {
         audioTheque.getMediaWords().add(mediaWord);
     }
 
-
     // add phrases file names form raw folder
     private void addAllWords() {
         Field[] fields = R.raw.class.getFields();
@@ -41,6 +38,7 @@ public class AudioThequeController {
         }
     }
 
+    // add audio files as MediaPlayers to List
     public void addAllMediaWords() {
         Field[] fields = R.raw.class.getFields();
         for (Field field : fields) {

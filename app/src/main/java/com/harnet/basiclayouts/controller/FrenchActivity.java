@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -13,13 +15,14 @@ import java.util.List;
 
 public class FrenchActivity extends AppCompatActivity {
     AudioThequeController audioThequeController = new AudioThequeController(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_french);
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         audioThequeController.addAllMediaWords(); // add all mediaFile from raw folder to List
-        initRecyclerView();
+        initRecyclerView(); // initialize recycler view
 
     }
 
@@ -32,5 +35,12 @@ public class FrenchActivity extends AppCompatActivity {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, audioThequeController, words, files);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    // back stack (go to parent arrow) controller
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

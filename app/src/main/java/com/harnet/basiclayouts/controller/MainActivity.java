@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity{
                     @Override
                     public void run() {
                         startActivity(intent);
-                        // this code will be executed after 2 seconds
                     }
                 }, 550);
             }
