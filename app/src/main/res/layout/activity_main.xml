@@ -32,17 +32,19 @@
         android:id="@+id/deIcoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toTopOf="@id/engIcoView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frIcoView"
-        app:layout_constraintBottom_toTopOf="@id/engIcoView"
         app:srcCompat="@drawable/de_ico" />
 
     <ImageView
         android:id="@+id/engIcoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
